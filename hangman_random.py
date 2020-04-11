@@ -1,5 +1,5 @@
 import re
-import getpass
+import random
 
 
 # Lists the index of a duplicate in a string
@@ -19,10 +19,14 @@ def list_duplicates_of(seq,item):
 
 # The game itself
 def game():
-    answer = getpass.getpass("Please input a word (lowercase a-z): ") # The chosen word
-    # If the answer is not valid, repeat the input until it's valid
-    while re.match("^[a-z]*$", answer) == None:
-        answer = getpass.getpass("Please input a word (a-z): ")
+    lineNum = 1 # Starting line number
+    f = open("words.txt", "r") # Opens words.txt.
+    randomWord = random.randint(1,370103) # Chooses a random line number
+    # Selects the answer randomly
+    for x in f:
+        if lineNum == randomWord:
+            answer = x[:-1] #[:-1] removes the blankspace at the end of the word
+        lineNum += 1
     # If the input is not an int, restarts loop
     while True:
         try:
@@ -31,7 +35,7 @@ def game():
         except:
             print("Invalid value.")
     # If maxStrikes is chosen to be 0, it "removes" the limit by making the value really big.
-    # There's definitely a better way to do this, but I CBA.
+    # 200IQ programming right there, folks.
     if maxStrikes == 0:
         maxStrikes = 999999
     underscoreAmount = 0 # Amount of underscores/symbols to hide the word with in-game
@@ -59,8 +63,6 @@ def game():
         elif len(letter) > 1:
             print("Too many characters.")
             continue
-        else:
-            print("You chose: " + letter + "\n")
         # Checks if letter is already guessed
         if letter in guesses:
             print("Already guessed!")
