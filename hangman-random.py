@@ -1,5 +1,5 @@
 import re
-import getpass
+import random
 
 
 # Lists the index of a duplicate in a string
@@ -19,10 +19,14 @@ def list_duplicates_of(seq, item):
 
 # The game itself
 def game():
-    answer = getpass.getpass("Please input a word (a-z): ")  # The chosen word
-    # If the answer is not valid, repeat the input until it's valid
-    while re.match("^[a-z]*$", answer) is None:
-        answer = getpass.getpass("Please input a word (a-z): ")
+    lineNum = 1  # Starting line number
+    f = open("words.txt","r")  # Opens words.txt.
+    randomWord = random.randint(1, 370103)  # Chooses a random line number
+    # Selects the answer randomly
+    for x in f:
+        if lineNum == randomWord:
+            answer = x[:-1]  # [:-1] removes the blank space at the end of the word
+        lineNum += 1
     # If the input is not an int, restarts loop
     while True:
         try:
@@ -95,6 +99,6 @@ def game():
         print()
 
 
-game()
+game()  # Starts the game
 
 # Made by FlamingLeo, April 2020
