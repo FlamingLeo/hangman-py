@@ -21,7 +21,7 @@ def list_duplicates_of(seq,item):
 def game():
     answer = getpass.getpass("Please input a word (lowercase a-z): ") # The chosen word
     # If the answer is not valid, repeat the input until it's valid
-    while re.match("^[a-z]*$", answer) == None:
+    while re.match("^[a-z]*$", answer) is None:
         answer = getpass.getpass("Please input a word (a-z): ")
     # If the input is not an int, restarts loop
     while True:
@@ -59,8 +59,9 @@ def game():
         elif len(letter) > 1:
             print("Too many characters.")
             continue
-        else:
-            print("You chose: " + letter + "\n")
+        elif len(letter) == 0:
+            print("Please input a character.")
+            continue
         # Checks if letter is already guessed
         if letter in guesses:
             print("Already guessed!")
@@ -100,6 +101,7 @@ while True:
     if playAgain.upper() == 'Y':
         game()
     elif playAgain.upper() == 'N':
+        print("Thanks for playing!")
         break
     else:
         print("Invalid response.")
