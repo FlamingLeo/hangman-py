@@ -3,12 +3,12 @@ import getpass
 
 
 # Lists the index of a duplicate in a string
-def list_duplicates_of(seq,item):
+def list_duplicates_of(seq, item):
     start_at = -1
     locs = []
     while True:
         try:
-            loc = seq.index(item,start_at+1)
+            loc = seq.index(item, start_at + 1)
         except ValueError:
             break
         else:
@@ -19,14 +19,14 @@ def list_duplicates_of(seq,item):
 
 # The game itself
 def game():
-    answer = getpass.getpass("Please input a word (lowercase a-z): ") # The chosen word
+    answer = getpass.getpass("Please input a word (lowercase a-z): ")  # The chosen word
     # If the answer is not valid, repeat the input until it's valid
     while re.match("^[a-z]*$", answer) is None:
         answer = getpass.getpass("Please input a word (a-z): ")
     # If the input is not an int, restarts loop
     while True:
         try:
-            maxStrikes = int(input('Please input the maximum amount of strikes (0 for none): ')) 
+            maxStrikes = int(input('Please input the maximum amount of strikes (0 for none): '))
             break
         except:
             print("Invalid value.")
@@ -34,15 +34,15 @@ def game():
     # There's definitely a better way to do this, but I CBA.
     if maxStrikes == 0:
         maxStrikes = 999999
-    underscoreAmount = 0 # Amount of underscores/symbols to hide the word with in-game
-    letterArray = [] # Contains each letter of the word in an array, in the correct order
+    underscoreAmount = 0  # Amount of underscores/symbols to hide the word with in-game
+    letterArray = []  # Contains each letter of the word in an array, in the correct order
     for i in answer:
         letterArray.append(i)
         underscoreAmount += 1
-    gameword = "-" * underscoreAmount # The hidden word, to be revealed
-    strikes = 0 # Strikes
-    guesses = [] # Correct letters
-    misses = [] # Incorrect letters
+    gameword = "-" * underscoreAmount  # The hidden word, to be revealed
+    strikes = 0  # Strikes
+    guesses = []  # Correct letters
+    misses = []  # Incorrect letters
     while answer != gameword:
         # Loads the game stats
         print(gameword)
@@ -52,6 +52,12 @@ def game():
         print("Wrong Letters: " + str(misses).strip('[]'))
         print()
         letter = input("Input a letter: ").lower()
+        # Give up
+        if letter == "stop":
+            print()
+            print("You lose!")
+            print("The word was: " + answer)
+            break
         # Checks for valid input (1 character, a-z)
         if not re.match("^[a-z]*$", letter):
             print("Invalid character.")
@@ -74,7 +80,7 @@ def game():
             print("Correct!\n")
             guesses.append(letter)
             tempList = list(gameword)
-            letterPos = list_duplicates_of(answer,letter)
+            letterPos = list_duplicates_of(answer, letter)
             for i in letterPos:
                 tempList[i] = letter
             gameword = "".join(tempList)
@@ -87,7 +93,7 @@ def game():
             print("You lose!")
             print("The word was: " + answer)
             break
-    if strikes < maxStrikes:
+    if strikes < maxStrikes and letter != "stop":
         print()
         print("You Win!")
         print("The word was: " + answer)
@@ -95,13 +101,12 @@ def game():
         print()
 
 
-game() # Starts the game
+game()  # Starts the game
 while True:
     playAgain = input("Play again? (y/n) ")
     if playAgain.upper() == 'Y':
         game()
     elif playAgain.upper() == 'N':
-        print("Thanks for playing!")
         break
     else:
         print("Invalid response.")

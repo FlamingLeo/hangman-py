@@ -56,6 +56,12 @@ def game():
         print("Wrong Letters: " + str(misses).strip('[]'))
         print()
         letter = input("Input a letter: ").lower()
+        # Give up
+        if letter == "stop":
+            print()
+            print("You lose!")
+            print("The word was: " + answer)
+            break
         # Checks for valid input (1 character, a-z)
         if not re.match("^[a-z]*$", letter):
             print("Invalid character.")
@@ -91,7 +97,7 @@ def game():
             print("You lose!")
             print("The word was: " + answer)
             break
-    if strikes < maxStrikes:
+    if strikes < maxStrikes and letter != "stop":
         print()
         print("You Win!")
         print("The word was: " + answer)
@@ -105,7 +111,6 @@ while True:
     if playAgain.upper() == 'Y':
         game()
     elif playAgain.upper() == 'N':
-        print("Thanks for playing!")
         break
     else:
         print("Invalid response.")
