@@ -10,3 +10,5 @@ _"hangman_simplified.py"_ is essentially the same as the previous one, however, 
 _"hangman_allinone"_ is the complete version of Hangman, featuring all 3 versions of Hangman in one.
 
 **NOTE:** Due to the way the code accesses the text files, you must keep the executable files in the same directory as them. Shortcuts are allowed though.
+
+**HINT:** If you get stuck or want to skip a word, type "stop" when inputting a letter.
