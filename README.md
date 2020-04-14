@@ -8,3 +8,5 @@ _"hangman_random.py"_ is the "singeplayer" version, where the word is randomly g
 _"hangman_simplified.py"_ is essentially the same as the previous one, however, it uses the JUST WORDS! USA English dictionary (http://www.gwicks.net/dictionaries.htm), which has far less words than the entire english vocabulary.
 
 _"hangman_allinone"_ is the complete version of Hangman, featuring all 3 versions of Hangman in one.
+
+**NOTE:** Due to the way the code accesses the text files, you must keep the executable files in the same directory as them. Shortcuts are allowed though.
